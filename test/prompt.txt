@@ -1,0 +1,26 @@
+Documents:
+Wikipedia Title: Henry II, Duke of Münsterberg
+Henry II of Münsterberg( – 11 March 1420) was Duke of Münsterberg( Ziębice) since 1410 until his death( as co-ruler of his brother John I). He was the third son of Duke Bolko III of Münsterberg by his wife Euphemia, daughter of Duke Bolesław of Bytom.
+Wikipedia Title: Bolko III of Münsterberg
+Bolko III of Münsterberg (– 13 June 1410) was a Duke of Münsterberg (Ziębice) from 1358 until his death, and ruler over Gleiwitz (Gliwice) during 1369–1373. He was the eldest son of Nicholas the Small, Duke of Münsterberg, by his wife Agnes, daughter of Herman Krušina of Lichtenberg.
+
+Q: Answer the following question by reasoning step-by-step. Who is Henry Ii, Duke Of Münsterberg's paternal grandfather?
+A: Henry II was Duke of Münsterberg. Henry II was the third son of Duke Bolko III of Münsterberg. Duke Bolko III of Münsterberg was the eldest son of, Nicholas the Small. So the answer is: Nicholas the Small.
+
+Documents:
+Wikipedia Title: Uzeb
+UZEB is a jazz fusion band from Montreal, Quebec, Canada, who were active from 1976 to 1992, and reunited in November 2016. The members are Alain Caron( bass guitar), Michel Cusson( guitar), and Paul Brochu( drums). The band won a number of Canadian awards during the 1980s. By 1989, international sales of UZEB's first eight recordings had exceeded 200,000 units, which the" Encyclopedia of Music in Canada" calls" an unprecedented figure for a Canadian jazz group".
+Wikipedia Title: Honeymoon Suite
+Honeymoon Suite is a Canadian hard rock band formed in 1981 in Niagara Falls, Ontario. The band's name was a nod to the fact that Niagara Falls is the unofficial honeymoon capital of the world.
+
+Q: Answer the following question by reasoning step-by-step. Are both Uzeb and Honeymoon Suite from the same country?
+A: Uzeb is from Montreal, Quebec, Canada. Honeymoon's nationality is Canada. Both of them are from Canada. So the answer is: yes.
+
+Documents:
+Wikipedia Title: Marie Tudor (1912 film)
+Marie Tudor is a 1912 French silent historical film directed by Albert Capellani and starring Jeanne Delvair, Paul Capellani and Romuald Joubé. The film is an adaptation of Victor Hugo's 1833 play of the same title set at the court of Mary I of England. It was re-released in 1917, and is sometimes dated to that year.
+Wikipedia Title: Albert Capellani
+Albert Capellani (23 August 1874 – 26 September 1931) was a French film director and screenwriter of the silent era. He directed films between 1905 and 1922. One of his brother was the actor-sculptor Paul Capellani. and another the film director Roger Capellani. Capellani, along with his brother Paul, studied acting under Charles le Bargy at the Conservatoire de Paris. Starting his career as an actor, he worked with the director André Antoine at the Théâtre Libre and the Odéon. He then began directing plays for the Odéon, working alongside the lauded actor and director . In 1903, he became the head of the Alhambra music hall in Paris. He continued to work as an actor and director until he received a job offer from the Pathé Frères studio in 1905. Charles Pathé, who held high hopes for the artistic potential of film as a medium, invited him to join the artistic staff under the direction of Ferdinand Zecca. When Pathé in 1908 launched a "prestige" production unit, the Société des Auteurs et des Gens de Lettres (SCAGL), Capellani became its first artistic director. During his Pathé career, he worked as an adviser and supervisor to various directors, including Michel Carré, Georges Denola, Henri Étiévant, and Georges Monca. He often drew upon his theatrical background to cast stage actor colleagues for his films, such as Henry Krauss, who appeared as Quasimodo in his "The Hunchback of Notre Dame" (1911) and as Jean Valjean in his (1912). " Les Misérables" also gave the actress Mistinguett her first important screen role. His films cover many genres, including melodramas, fairy tales, costume dramas with historical and biblical themes, and literary adaptations, especially after taking up directorship of SCAGL in 1908. Characteristics of his style include a keen sense for staging actors in three-dimensional space, dynamic use of location filming, and an attention to subtle, realistic details that highlight the humanity of his characters. In 1914 he served in the French army as an officer but was wounded in at the battle of Soissons near Champaigne First Battle of Champagne. He was released from duty but because of the war was unable to direct films in France. In 1915, he moved to the United States and worked for the film studios Pathé Exchange, Metro Pictures Corporation, the World Film Company, Cosmopolitan Productions, Nazimova Productions, and his own newly created studio, Capellani Productions, Inc. Under his direction, Alla Nazimova rose to prominence as one of the greatest silent film stars in Hollywood. Capellani returned to France in 1923, where he floated several new film projects but was unable to bring any to fruition. He died of diabetes in 1931.
+
+Q: Answer the following question by reasoning step-by-step. Where did the director of film Marie Tudor (1912 Film) die?
+A: 

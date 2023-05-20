@@ -1,0 +1,29 @@
+context: The newest embeddings model is text-embedding-ada-002.
+question: What is our newest embeddings model?
+answer:
+text-embedding-ada-002
+```
+
+## Training
+
+To train a model, run the following command:
+
+```
+python -m allennlp.run train config/training_config.json -s serialization_dir --include-package my_library
+```
+
+The `serialization_dir` is the directory in which the model and its logs will be saved.
+
+## Evaluation
+
+To evaluate a model, run the following command:
+
+```
+python -m allennlp.run evaluate serialization_dir/model.tar.gz data/dev.json --include-package my_library
+```
+
+## Prediction
+
+To
+doooooooooooooooooooooge
+text-embedding-ada-002
