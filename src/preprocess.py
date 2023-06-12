@@ -122,12 +122,12 @@ class StructureDataset(Dataset):
                 input_tuple = (idxes, input_text, question_text, answer_text )
             self.context_qa_tuples.append(input_tuple)
 
-            with open(f'outputs/{idx}.txt', 'w') as f:
-                f.write(input_tuple[1])
+#            with open(f'outputs/{idx}.txt', 'w') as f:
+#                f.write(input_tuple[1])
 
-#        logger.info('Saving results to ' + file_path)
-#        with open(file_path, 'wb') as f:
-#            pickle.dump(self.context_qa_tuples, f)
+        logger.info('Saving results to ' + file_path)
+        with open(file_path, 'wb') as f:
+            pickle.dump(self.context_qa_tuples, f)
 
     def __len__(self):
         return len(self.context_qa_tuples)
