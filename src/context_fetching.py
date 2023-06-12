@@ -214,7 +214,7 @@ def elasticsearch_bm25_fetching(qa_pairs, dataset_name):
         with open(file_path, 'rb') as f:
             context_qa_tuples = pickle.load(f)
 
-        logger.info('Load bm25 Fetching Result')
+        logger.info('Load bm25 Fetching Result from ' + file_path)
 
         return context_qa_tuples
 
@@ -245,7 +245,7 @@ def elasticsearch_bm25_fetching(qa_pairs, dataset_name):
 
     context_qa_tuples = list(zip(idxes, contexts, questions, answers))
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_qa_tuples, f)
@@ -281,7 +281,7 @@ def dpr_faiss_fetching(qa_pairs, dataset_name):
         with open(file_path, 'rb') as f:
             context_qa_tuples = pickle.load(f)
 
-        logger.info('Load existing FAISS fetching results')
+        logger.info('Load existing FAISS fetching results from ' + file_path)
 
         return context_qa_tuples
 
@@ -479,7 +479,7 @@ def tfidf_fetching(qa_pairs, dataset_name):
         with open(file_path, 'rb') as f:
             context_qa_tuples = pickle.load(f)
 
-        logger.info('Load TF-IDF Fetching Result')
+        logger.info('Load TF-IDF Fetching Result from ' + file_path)
 
         return context_qa_tuples
 
@@ -497,7 +497,7 @@ def tfidf_fetching(qa_pairs, dataset_name):
             questions.append(question)
             answers.append(answer)
 
-        logger.info('Load ids of fetched documents')
+        logger.info('Load ids of fetched documents from ' + path)
         with open(path, 'rb') as f:
             all_docids = pickle.load(f)
     else:
@@ -543,7 +543,7 @@ def tfidf_fetching(qa_pairs, dataset_name):
         contexts.append(context)
     context_qa_tuples = list(zip(contexts, questions, answers))
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_qa_tuples, f)
@@ -562,7 +562,7 @@ def mdr_fetching(qa_pairs, dataset_name):
         with open(file_path, 'rb') as f:
             context_qa_tuples = pickle.load(f)
 
-        logger.info('Load MDR Fetching Result')
+        logger.info('Load MDR Fetching Result from ' + file_path)
 
         return context_qa_tuples
 
@@ -680,7 +680,7 @@ def mdr_fetching(qa_pairs, dataset_name):
         answers = [answer for answer in answers for _ in range(config['top_n'])]
     context_qa_tuples = list(zip(contexts, questions, answers))
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_qa_tuples, f)
@@ -702,7 +702,7 @@ def golden_fetching(qa_pairs, dataset_name):
         with open(file_path, 'rb') as f:
             context_qa_tuples = pickle.load(f)
 
-        logger.info('Load GOLDEN Fetching Result')
+        logger.info('Load GOLDEN Fetching Result from ' + file_path)
 
         return context_qa_tuples
 
@@ -743,7 +743,7 @@ def manual_fetching(qa_pairs, dataset_name):
         with open(file_path, 'rb') as f:
             context_qa_tuples = pickle.load(f)
 
-        logger.info('Load manual Fetching Result')
+        logger.info('Load manual Fetching Result from ' + file_path)
 
         return context_qa_tuples
 
@@ -770,7 +770,7 @@ def manual_fetching(qa_pairs, dataset_name):
     for data in all_data:
         context_qa_tuples.append([data['_id'], data['documents'], data['question'], data['answer']])
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_qa_tuples, f)
@@ -802,4 +802,5 @@ if __name__ == '__main__':
 #    read_enwiki_parallel()
     qa_pairs = read_data(config['dataset_name'])
     context_qa_tuples = context_fetching(qa_pairs)
+    print(len(context_qa_tuples))
 

@@ -46,12 +46,16 @@ def clean_string(text, is_question=False):
 
 def get_file_path(file_name, category, folder_flag=False):
     dataset_name = config['dataset_name']
+    # get file name as file name prefix
+    path = config['_'.join([dataset_name, 'path'])]
+    dataset_file_name = os.path.splitext(os.path.basename(path))[0]
+    # extract dataset name for saving folder
     if 'metaqa' == dataset_name[:6]:
         dataset_name = 'metaqa'
     elif 'hotpotqa' == dataset_name[:8]:
         dataset_name = 'hotpotqa'
-    elif '2wikimulithopqa' == dataset_name[:15]:
-        dataset_name = '2wikimultihop'
+    elif '2wikimultihopqa' == dataset_name[:15]:
+        dataset_name = '2wikimultihopqa'
 
     if 'context_reader' == category:
         if 'faiss' == config['retriever'][:5]:
@@ -89,7 +93,7 @@ def get_file_path(file_name, category, folder_flag=False):
             os.makedirs(folder)
 
         # baseline
-        file_name_prefix = config['dataset_name']
+        file_name_prefix = dataset_file_name
         if 'none' != config['graph_type']:
             # kg1
             file_name_prefix = '_'.join([file_name_prefix,
@@ -126,7 +130,8 @@ def get_file_path(file_name, category, folder_flag=False):
             os.makedirs(folder)
 
         # baseline
-        file_name_prefix = '_'.join([config['mode'],
+        file_name_prefix = '_'.join([dataset_file_name,
+                                     config['mode'],
                                      config['retriever']])
         if config['retriever'] not in ['golden', 'manual']:
             file_name_prefix = '_'.join([file_name_prefix, str(config['top_n'])])
@@ -176,7 +181,7 @@ def clean_files():
         y = input('Confirm deleting the folder? (y or n)')
         if y in ['y', 'Y'] and os.path.exists(folder_path):
             os.rmdir(folder_path)
-    elif config['override'] in ['fetching_results',
+    elif config['override'] in ['fetched_results',
                                 'fetched_entity',
                                 'fetched_graph',
                                 'preprocessed_tuple']:
@@ -187,21 +192,21 @@ def clean_files():
             os.remove(file_path)
 
         # remove graphs
-        if config['override'] in ['fetching_results', 'fetched_entity', 'fetched_graph']:
+        if config['override'] in ['fetched_results', 'fetched_entity', 'fetched_graph']:
             file_path = get_file_path(config['context_graph_qa_tuple_text_pickle'],
                                       category='fetching_results')
             if os.path.exists(file_path):
                 os.remove(file_path)
 
         # remove entities
-        if config['override'] in ['fetching_results', 'fetched_entity']:
+        if config['override'] in ['fetched_results', 'fetched_entity']:
             file_path = get_file_path(config['context_entity_qa_tuple_text_pickle'],
                                       category='fetching_results')
             if os.path.exists(file_path):
                 os.remove(file_path)
 
         # remove contexts qa results
-        if 'fetching_results' == config['override']:
+        if 'fetched_results' == config['override']:
             file_path = get_file_path(config['context_qa_tuple_text_pickle'],
                                       category='fetching_results')
             if os.path.exists(file_path):

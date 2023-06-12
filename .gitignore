@@ -5,3 +5,5 @@ save/
 temp/
 openai*
 *pycache*
+test*
+log/

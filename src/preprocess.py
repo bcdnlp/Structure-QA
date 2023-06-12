@@ -55,7 +55,7 @@ class StructureDataset(Dataset):
             with open(file_path, 'rb') as f:
                 self.context_qa_tuples = pickle.load(f)
 
-            logger.info('Load context question answer tuple ids')
+            logger.info('Load context question answer tuple ids from ' + file_path)
 
             return
 
@@ -63,7 +63,7 @@ class StructureDataset(Dataset):
             tokenizer = T5Tokenizer.from_pretrained(config['infer_model'],
                                                     model_max_length=config['model_max_length'])
         self.context_qa_tuples = []
-        for context_qa_tuple in tqdm(tuples_text,
+        for idx, context_qa_tuple in tqdm(enumerate(tuples_text),
                                      desc='Converting text to ids'):
             if 'none' == config['graph_type']:
                 idxes, context_text, question_text, answer_text = context_qa_tuple
@@ -84,20 +84,28 @@ class StructureDataset(Dataset):
 
             # add question prompts based on different models
             if 'openai' == config['infer_model']:
-                question = '\n'.join(['Question:', question_text])
+#                question_prompt = 'Question:'
+#                question = '\n'.join([question_prompt, question_text])
+                if config['cot']:
+                    question_prompt = 'Q: Answer the following question by reasoning step-by-step.'
+                else:
+                    question_prompt = 'Q: '
+                question = ' '.join([question_prompt, question_text])
                 input_text = '\n\n'.join([input_text, question])
             elif 't5' in config['infer_model']:
                 if config['cot']:
-                    question_prompt = 'Answer the following question by reasoning step-by-step.'
+                    question_prompt = 'Q: Answer the following question by reasoning step-by-step.'
                 else:
-                    question_prompt = 'Answer the following question.'
+                    question_prompt = 'Q: Answer the following question.'
                 question = ' '.join([question_prompt, question_text])
                 input_text = '\n\n'.join([input_text, question])
 
             # add answer prompt
-            answer_prompt = 'Answer:\n'
+#            answer_prompt = 'Answer:\n'
+#            input_text = '\n\n'.join([input_text, answer_prompt])
+            answer_prompt = 'A: '
 #            answer_prompt = 'output short answer or what other information is required to answer the question:'
-            input_text = '\n\n'.join([input_text, answer_prompt])
+            input_text = '\n'.join([input_text, answer_prompt])
 
             # add demonstrations
             if 'few-shot' == config['shot']:
@@ -114,8 +122,12 @@ class StructureDataset(Dataset):
                 input_tuple = (idxes, input_text, question_text, answer_text )
             self.context_qa_tuples.append(input_tuple)
 
-        with open(file_path, 'wb') as f:
-            pickle.dump(self.context_qa_tuples, f)
+            with open(f'outputs/{idx}.txt', 'w') as f:
+                f.write(input_tuple[1])
+
+#        logger.info('Saving results to ' + file_path)
+#        with open(file_path, 'wb') as f:
+#            pickle.dump(self.context_qa_tuples, f)
 
     def __len__(self):
         return len(self.context_qa_tuples)

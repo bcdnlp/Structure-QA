@@ -5,4 +5,4 @@ NVIDIA RTX A6000
 NVIDIA RTX A5000
 NVIDIA RTX A5000
 Start GOLDEN Fetching
-Load GOLDEN Fetching Result
+Load GOLDEN Fetching Result from temp/2wikimultihopqa/golden/sample_100_2wikimultihop_dev.json_entity_openai_openai_few-shot_openai_context_qa_tuple_text_2.pkl

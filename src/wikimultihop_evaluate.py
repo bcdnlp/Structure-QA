@@ -270,7 +270,3 @@ if __name__ == '__main__':
     eval(sys.argv[1], sys.argv[2], sys.argv[3])
     # eval("pred.json", "gold.json", "id_aliases.json")
 
-
-
-
-

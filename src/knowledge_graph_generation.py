@@ -45,8 +45,8 @@ def unflatten(index, flatten_results):
     for idx, result in zip(index, flatten_results):
         if idx != prev_idx:
             results.append([])
+            prev_idx = idx
         results[-1].append(result)
-        prev_idx = idx
 
     for i in range(len(results)):
         results[i] = '\n\n'.join(results[i])
@@ -192,7 +192,15 @@ def build_graph_by_llm(contexts, entities, questions):
     else:
         logger.info('Generating graphs with relations')
         _, flatten_contexts = flatten(contexts)
-        flatten_questions = [question for question in questions for _ in (0, 1)]
+        flatten_questions = []
+        prev_idx = -1
+        question_idx = -1
+        for idx, _ in zip(index, flatten_contexts):
+            if idx != prev_idx:
+                question_idx += 1
+                prev_idx = idx
+            flatten_questions.append(questions[question_idx])
+
         prompts = []
         for context, entities, question in zip(flatten_contexts,
                                                flatten_entities,
@@ -231,11 +239,19 @@ def construct_entity_graph(context_qa_tuples_text):
         with open(file_path, 'rb') as f:
             context_graph_qa_tuples_text = pickle.load(f)
 
-        logger.info('Load built graph results')
+        logger.info('Load built graph results from ' + file_path)
 
         return context_graph_qa_tuples_text
 
     idxes, contexts, questions, answers = list(zip(*context_qa_tuples_text))
+    # split context into paragraphs content
+    processed_contexts = []
+    for context in contexts:
+        context = context.split('\n')
+        context = [context[i] for i in range(1, len(context), 2)]
+        context = '\n\n'.join(context)
+        processed_contexts.append(context)
+
     logger.info('Entity extraction method: %s'%(config['ner_model']))
 
     # ner: spacy
@@ -246,28 +262,29 @@ def construct_entity_graph(context_qa_tuples_text):
         with open(ner_path, 'rb') as f:
             context_entity_qa_tuples_text = pickle.load(f)
             entities = list(zip(*context_entity_qa_tuples_text))[2]
-        logger.info('Load ner results')
+        logger.info('Load ner results from ' + ner_path)
     else:
+        # handle each paragraph individually
         if 'spacy' == config['ner_model']:
-            entities = spacy_ner(contexts)
+            entities = spacy_ner(processed_contexts)
         elif 'manual-ner' == config['ner_model']:
-            entities = manual_ner(contexts)
+            entities = manual_ner(processed_contexts)
         elif 'openai' == config['ner_model']:
-            entities = llm_ner(contexts)
+            entities = llm_ner(processed_contexts)
 
         context_entity_qa_tuples_text = list(zip(idxes, contexts, entities, questions, answers))
         with open(ner_path, 'wb') as f:
             pickle.dump(context_entity_qa_tuples_text, f)
 
     # relation and graph building: openai gpt
-    if 'openai' == config['rel_model']:
-        graphs = build_graph_by_llm(contexts, entities, questions)
+    if 'openai' == config['rel_model'] or 't5' in config['rel_model']:
+        graphs = build_graph_by_llm(processed_contexts, entities, questions)
     elif 'manual-rel' == config['rel_model']:
         pass
 
     context_graph_qa_tuples_text = list(zip(idxes, contexts, graphs, questions, answers))
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_graph_qa_tuples_text, f)
@@ -288,7 +305,7 @@ def construct_entity_graph_directly(context_qa_tuples_text):
         with open(file_path, 'rb') as f:
             context_graph_qa_tuples_text = pickle.load(f)
 
-        logger.info('Load built graph results')
+        logger.info('Load built graph results from ' + file_path)
 
         return context_graph_qa_tuples_text
 
@@ -318,7 +335,7 @@ def construct_entity_graph_directly(context_qa_tuples_text):
 
     context_graph_qa_tuples_text = list(zip(idxes, contexts, graphs, questions, answers))
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_graph_qa_tuples_text, f)
@@ -337,7 +354,7 @@ def construct_empty_graph(context_qa_tuples_text):
         with open(file_path, 'rb') as f:
             context_graph_qa_tuples_text = pickle.load(f)
 
-        logger.info('Load built graph results')
+        logger.info('Load built graph results from ' + file_path)
 
         return context_graph_qa_tuples_text
 
@@ -345,7 +362,7 @@ def construct_empty_graph(context_qa_tuples_text):
     graphs = [''] * len(idxes)
     context_graph_qa_tuples_text = list(zip(idxes, contexts, graphs, questions, answers))
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_graph_qa_tuples_text, f)
@@ -364,7 +381,7 @@ def manual_graph():
         with open(file_path, 'rb') as f:
             context_graph_qa_tuples_text = pickle.load(f)
 
-        logger.info('Load built graph results')
+        logger.info('Load built graph results from ' + file_path)
 
         return context_graph_qa_tuples_text
 
@@ -385,7 +402,7 @@ def manual_graph():
         tuple_text = tuple(tuple_text)
         context_graph_qa_tuples_text.append(tuple_text)
 
-    logger.info('Saving Results')
+    logger.info('Saving Results to ' + file_path)
     # save for future use
     with open(file_path, 'wb') as f:
         pickle.dump(context_graph_qa_tuples_text, f)

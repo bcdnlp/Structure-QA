@@ -159,7 +159,7 @@ def openai_inference(dev_data):
             except:
                 time.sleep(3)
                 print("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror")
-                print(response)
+#                print(response)
 #                print(batch[0])
 #                input()
         prediction = response['choices'][0]['message']['content']
@@ -248,19 +248,19 @@ def run():
 
     # extract answer from CoT
     if config['cot']:
-        for idx in range(len(results)):
-            prediction = results[idx][2]
-            extract = re.search('the answer is: (.*)\.$', prediction)
-            if extract is not None:
-                prediction = extract.group(1)
-            results[idx][2] = prediction
-
         # save CoT results
         path = get_file_path(config['results_file_CoT'], category='results')
         logger.info('Writing results to file ' + path)
         with open(path, 'w', encoding='utf-8') as f:
             for result in tqdm(results):
                 f.write('\t'.join(result) + '\n')
+
+        for idx in range(len(results)):
+            prediction = results[idx][2]
+            extract = re.search('the answer is: (.*)\.$', prediction, re.IGNORECASE)
+            if extract is not None:
+                prediction = extract.group(1)
+            results[idx][2] = prediction
 
     # save final results
     path = get_file_path(config['results_file'], category='results')

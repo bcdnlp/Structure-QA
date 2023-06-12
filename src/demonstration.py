@@ -135,16 +135,22 @@ def demo_generation(prompt):
                 graph = '\n'.join(['Graph:', demo['useful triples']])
             demo_adjust = '\n\n'.join([demo_adjust, graph])
 
-        # question
-        question = '\n'.join(['Question:', demo['question']])
-        demo_adjust = '\n\n'.join([demo_adjust, question])
-
-        # CoT + answer or answer only
+        # question ans answer
         if config['cot']:
-            answer = '\n'.join(['Answer:', demo['answer_CoT']])
+#            question = '\n'.join(['Question:', demo['question']])
+#            answer = '\n'.join(['Answer:', demo['answer_CoT']])
+            question = ' '.join(['Q: Answer the following question by reasoning step-by-step.', demo['question']])
+            answer = ' '.join(['A:', demo['answer_CoT']])
         else:
-            answer = '\n'.join(['Answer:', demo['answer']])
-        demo_adjust = '\n\n'.join([demo_adjust, answer])
+#            question = '\n'.join(['Question:', demo['question']])
+#            answer = '\n'.join(['Answer:', demo['answer']])
+            question = ' '.join(['Q:', demo['question']])
+            answer = ' '.join(['A:', demo['answer']])
+
+        # question ans answer
+#        qa = '\n\n'.join([question, answer])
+        qa = '\n'.join([question, answer])
+        demo_adjust = '\n\n'.join([demo_adjust, qa])
 
         # connection to the next demo or promt
         demo_adjust += '\n\n'

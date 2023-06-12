@@ -1,4 +1,1 @@
-Loading dataset
-Inferencing
-Writing results to file results/2wikimultihopqa_dev/openai/inference_golden_entity_openai_few-shot_openai_results_kg1.csv
-Evaluating
+Loading results from file results/2wikimultihopqa/openai/sample_100_2wikimultihop_dev.json_inference_golden_entity_openai_openai_few-shot_cot_openai_results_kg2_2.csv

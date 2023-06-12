@@ -1,6 +1,6 @@
 # mode
 mode: inference # inference, fine-tune
-evaluate_only: False # True, False
+evaluate_only: True # True, False
 debug: False # True, False
 results_debug: results_debug.csv # debug file
 
@@ -20,7 +20,7 @@ metaqa_3hop_dev_path: data/metaqa/3-hop/vanilla/qa_dev.txt
 hotpotqa_train_path: data/hotpotqa/hotpot_train_v1.1.json
 #hotpotqa_dev_path: data/hotpotqa/hotpot_dev_distractor_v1.json
 #hotpotqa_dev_path: data/hotpotqa/sample_100_hotpot_dev_distractor_related.json
-hotpotqa_dev_path: data/hotpotqa/sample_100_hotpot_dev_distractor.json
+hotpotqa_dev_path: data/hotpotqa/sample_100_hotpot_dev_distractor_2.json
 #hotpotqa_dev_path: data/hotpotqa/sample_1_hotpot_dev_distractor_new.json # for program logic test
 #hotpotqa_dev_path: data/hotpotqa/sample_14_hotpot_dev_cgqa_CoT_annotation.json # for manual settings
 hotpotqa_demo_path: data/hotpotqa/sample_02_hotpot_dev_cgqa_CoT_annotation_demo.json
@@ -28,7 +28,11 @@ hotpotqa_graph_demo_path: data/hotpotqa/graph_demo.json
 
 2wikimultihopqa_train_path: data/2wikimultihop/train.json
 #2wikimultihopqa_dev_path: data/2wikimultihop/dev.json
-2wikimultihopqa_dev_path: data/2wikimultihop/sample_100_2wikimultihop_dev.json
+#2wikimultihopqa_dev_path: data/2wikimultihop/sample_500_2wikimultihop_dev.json
+2wikimultihopqa_dev_path: data/2wikimultihop/sample_100_2wikimultihop_dev.json.bak2
+#2wikimultihopqa_dev_path: data/2wikimultihop/sample_100_2wikimultihop_dev_2.json
+#2wikimultihopqa_dev_path: data/2wikimultihop/sample_10_2wikimultihop_dev.json
+#2wikimultihopqa_dev_path: data/2wikimultihop/sample_1_2wikimultihop_dev.json
 2wikimultihopqa_demo_path: data/2wikimultihop/sample_02_2wikimultihop_dev_cgqa_CoT_annotation_demo.json
 2wikimultihopqa_graph_demo_path: data/2wikimultihop/graph_demo.json
 2wikimultihopqa_id_aliases_path: data/2wikimultihop/id_aliases.json
@@ -83,17 +87,17 @@ context: wikipedia
 retriever: golden # bm25, faiss, faiss-mdr, tfidf, golden, manual
 retrieval: single # mdr: multi, others: single, unknown: iter
 # graph
-graph_type: none
+graph_type: entity
     # manual-entity, direct-entity (only for kg2)
     # entity, multi_node (not implemented), empty, none
 ner_model: openai # spacy, openai, manual-ner
-relation: none # full, useful, related (not implemented), none
+relation: full # full, useful, related (not implemented), none
 rel_model: openai
     # openai, google/flan-t5-(small/base/large/xl/xxl), golden, manual-rel
 rel_shot: few-shot # few-shot, zero-shot when rel_model is not manual-rel
 # inference
 shot: few-shot # few-shot, zero-shot
-cot: False # True, False
+cot: True # True, False
 infer_model: openai
     # openai, google/flan-t5-(small/base/large/xl/xxl)
 batch_size: 1
@@ -106,14 +110,14 @@ batch_size: 1
     # t5-3b   : inference: 64
     # t5-11b  : inference: 8
 results_dir: results/
-results_file: results_kg0.csv
-results_file_CoT: results_CoT_kg0.csv
-results_hotpot_file: results_hotpot_kg0.json
-results_2wikimultihop_file: results_2wikimultihop_kg0.json
+results_file: results_kg2_2.csv
+results_file_CoT: results_CoT_kg2_2.csv
+results_hotpot_file: results_hotpot_kg2_2.json
+results_2wikimultihop_file: results_2wikimultihop_kg2_2.json
 save_memory: True
-override: preprocessed_tuple
+override: none
     # none, context_reader, context_index, all
-    # fetching_results, fetched_entity, fetched_graph, preprocessed_tuple
+    # fetched_results, fetched_entity, fetched_graph, preprocessed_tuple
 
 # intermediate files name for reusing and saving time
 intermediate_folder: temp/
@@ -128,8 +132,8 @@ context_dpr_embedding_bin: context_dpr_embedding.mdr.bin
 context_mdr_embedding_bin: wiki_index.npy
 context_mdr_id2doc_bin: wiki_id2doc.json
 # category: fetching_results
-context_qa_tuple_text_pickle: context_qa_tuple_text.pkl
-context_entity_qa_tuple_text_pickle: context_entity_qa_tuple_text.pkl
-context_graph_qa_tuple_text_pickle: context_graph_qa_tuple_text_kg0.pkl
-tuple_ids_pickle: tuple_ids_kg0.pkl
+context_qa_tuple_text_pickle: context_qa_tuple_text_2.pkl
+context_entity_qa_tuple_text_pickle: context_entity_qa_tuple_text_2.pkl
+context_graph_qa_tuple_text_pickle: context_graph_qa_tuple_text_kg2_2.pkl
+tuple_ids_pickle: tuple_ids_kg2_3.pkl
 
