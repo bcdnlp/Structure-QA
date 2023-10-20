@@ -156,9 +156,9 @@ def openai_inference(dev_data):
                                 n=1,
                                 )
                 break
-            except:
+            except Exception as e:
+                print("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror", e)
                 time.sleep(3)
-                print("Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror")
 #                print(response)
 #                print(batch[0])
 #                input()
@@ -368,6 +368,6 @@ if __name__ == '__main__':
     if not config['evaluate_only']:
         run()
     else:
-#        evaluate_hotpot()
-        evaluate_2wikimultihop()
+        evaluate_hotpot()
+#        evaluate_2wikimultihop()
 #        evaluate()
